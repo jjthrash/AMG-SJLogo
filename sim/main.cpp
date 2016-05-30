@@ -17,7 +17,7 @@ void loop();
 
 Board *board = 0;
 
-void setCartesianPixelColor(int x, int y, int r, int b, int g) {
+void setCartesianPixelColor(int x, int y, int r, int g, int b) {
   board->setCartesianPixelColor(x, y, r, g, b);
 }
 
