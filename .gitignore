@@ -1,5 +1,5 @@
 sim/sim
-sim/bigtetris.cpp
+sim/sjlogo.cpp
 sim/platform.h
 
 # Created by https://www.gitignore.io/api/vim,c++
