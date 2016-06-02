@@ -14,20 +14,47 @@
 #define WIDTH 10
 #define HEIGHT 20
 
-int alpha = 0;
 int tick = 0;
-int direction = 1;
-int offset = 0;
+
+const int rowWrapWidths[] = {
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE-10,
+  STRIDE,
+  STRIDE,
+  STRIDE,
+  STRIDE,
+  STRIDE,
+  STRIDE,
+  STRIDE,
+  STRIDE,
+  STRIDE,
+  STRIDE
+};
+
+int offsets[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int directions[20] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
 void incrementWithBounce() {
-  offset = offset + direction;
-  if (offset == STRIDE - WIDTH || offset == 0) {
-    direction *= -1;
+  for (int i = 0; i < 20; i++) {
+    offsets[i] = offsets[i] + directions[i];
+    if (offsets[i] == rowWrapWidths[i] - WIDTH || offsets[i] == 0) {
+      directions[i] *= -1;
+    }
   }
 }
 
 void incrementWithWrap() {
-  offset = (offset + direction) % STRIDE;
+  for (int i = 0; i < 20; i++) {
+    offsets[i] = (offsets[i] + directions[i]) % rowWrapWidths[i];
+  }
 }
 
 void loop() {
@@ -38,10 +65,9 @@ void loop() {
     incrementWithWrap();
   }
 
-  int xoffset = offset;
   for (int i = 0; i < WIDTH; i++) {
     for (int j = 0; j < HEIGHT; j++) {
-      int index = (j*STRIDE+(i+xoffset)%STRIDE);
+      int index = (j*STRIDE+(i+offsets[j])%rowWrapWidths[j]);
       int* color = (int*)&palette[(int)image[index]];
       setCartesianPixelColor(i, j, color[0], color[1], color[2]);
     }
