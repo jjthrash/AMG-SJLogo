@@ -1,6 +1,7 @@
 sim/sim
 sim/sjlogo.cpp
 sim/platform.h
+sim/image.*
 
 # Created by https://www.gitignore.io/api/vim,c++
 
