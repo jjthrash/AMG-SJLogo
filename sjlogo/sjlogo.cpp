@@ -4,7 +4,7 @@
 #include "fakearduino.h"
 #endif
 
-#include "platform.h"
+#include "AMGBigTetris.h"
 
 #include <stdio.h>
 #include <string.h>

@@ -18,72 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 // Need to have e copy of adafruits nepixel Library in the according arduino folder
-#include <Adafruit_NeoPixel.h>
-
-#define PIN 3
-#define UP 9
-#define Left 10
-#define Right 11
-#define DOWN 12
-
-#define matrixx 20
-#define matrixy 10
-
-//
-// PLATFORM SPECIFIC
-//
-
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(200, PIN, NEO_GRB + NEO_KHZ800);
+#include <AMGBigTetris.h>
 
 void setup() {
-  strip.begin();
-  strip.show();
-  pinMode(UP, INPUT);
-  pinMode(DOWN, INPUT);
-  pinMode(Left, INPUT);
-  pinMode(Right, INPUT);
+  setupStrip();
+  setupController();
 }
-void setCartesianPixelColor(int x, int y, int r, int b, int g) {
-  // The IF statement takes all even rows and reverses them. This accounts for all odd rows linking from left to right and all even rows connecting from right to left.
-  if (x % 2) {
-    strip.setPixelColor((x*matrixy)+y, r, g, b);
-  }
-  else {
-    strip.setPixelColor((x*matrixy)+(matrixy-y-1), r, g, b);
-  }
-}
-
-void setLinearPixelColor(int i, int r, int g, int b) {
-  strip.setPixelColor(i, r, g, b);
-}
-
-void updateDisplay() {
-  strip.show();
-}
-
-int readRight() {
-  return digitalRead(Right);
-}
-
-int readLeft() {
-  return digitalRead(Left);
-}
-
-int readUp() {
-  return digitalRead(UP);
-}
-
-int readDown() {
-  return digitalRead(DOWN);
-}
-
-void clearBoard() {
-  for(int i = 0; i < strip.numPixels(); i++){
-    setLinearPixelColor(i, 0, 0, 0);
-  }
-}
-
-//
-// END PLATFORM SPECIFIC
-//
-
