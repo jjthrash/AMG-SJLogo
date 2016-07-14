@@ -61,8 +61,8 @@ void loop() {
   tick++;
 
   if (tick % 10 == 0) {
-    // incrementWithBounce();
-    incrementWithWrap();
+    incrementWithBounce();
+    // incrementWithWrap();
   }
 
   for (int i = 0; i < WIDTH; i++) {
