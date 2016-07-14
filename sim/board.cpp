@@ -52,11 +52,11 @@ void Board::updateDisplay() {
 }
 
 int Board::readRight() {
-  return left_key_down;
+  return right_key_down;
 }
 
 int Board::readLeft() {
-  return right_key_down;
+  return left_key_down;
 }
 
 int Board::readUp() {
